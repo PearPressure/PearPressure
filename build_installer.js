@@ -21,7 +21,7 @@ const msiCreator = new MSICreator({
     exe: 'PearPressure',
     name: 'Pear Presure',
     manufacturer: 'The Boomers',
-    version: '1.0.0',
+    version: '0.0.0',
 
     // Configure installer User Interface
     ui: {
