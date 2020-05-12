@@ -1,15 +1,57 @@
 {
   "name": "pearpressure",
+  "productName": "pearpressure",
   "version": "1.0.0",
-  "description": "The Pear Pressure application",
-  "main": "main.js",
+  "description": "My Electron application description",
+  "main": "src/index.js",
   "scripts": {
-    "test": "test",
-    "start": "electron ."
+    "start": "electron-forge start",
+    "package": "electron-forge package",
+    "make": "electron-forge make",
+    "publish": "electron-forge publish",
+    "lint": "echo \"No linting configured\""
   },
-  "author": "The Boomers",
-  "license": "ISC",
+  "keywords": [],
+  "author": {
+    "name": "The Boomers"
+  },
+  "license": "MIT",
+  "config": {
+    "forge": {
+      "packagerConfig": {},
+      "makers": [
+        {
+          "name": "@electron-forge/maker-squirrel",
+          "config": {
+            "name": "pearpressure"
+          }
+        },
+        {
+          "name": "@electron-forge/maker-zip",
+          "platforms": [
+            "darwin"
+          ]
+        },
+        {
+          "name": "@electron-forge/maker-deb",
+          "config": {}
+        },
+        {
+          "name": "@electron-forge/maker-rpm",
+          "config": {}
+        }
+      ]
+    }
+  },
+  "dependencies": {
+    "electron-squirrel-startup": "^1.0.0"
+  },
   "devDependencies": {
-    "electron": "^8.2.5"
+    "@electron-forge/cli": "^6.0.0-beta.51",
+    "@electron-forge/maker-deb": "^6.0.0-beta.51",
+    "@electron-forge/maker-rpm": "^6.0.0-beta.51",
+    "@electron-forge/maker-squirrel": "^6.0.0-beta.51",
+    "@electron-forge/maker-zip": "^6.0.0-beta.51",
+    "electron": "8.2.5"
   }
 }
