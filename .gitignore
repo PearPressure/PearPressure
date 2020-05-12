@@ -87,3 +87,9 @@ typings/
 
 # Electron-Forge
 out/
+
+# Windows installer
+windows_installer/
+
+# Visual Studio
+.vs/
