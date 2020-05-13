@@ -19,7 +19,7 @@ const msiCreator = new MSICreator({
     // Configure metadata
     description: 'This is a demo application',
     exe: 'PearPressure',
-    name: 'Pear Presure',
+    name: 'Pear Pressure',
     manufacturer: 'The Boomers',
     version: '0.0.0',
 

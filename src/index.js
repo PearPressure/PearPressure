@@ -1,3 +1,7 @@
+/* Defines Behavior for windows and other features in
+ * the Pear Pressure Application
+ */
+
 const { app, BrowserWindow } = require('electron');
 const path = require('path');
 
@@ -15,6 +19,7 @@ const createWindow = () => {
 
   // and load the index.html of the app.
   mainWindow.loadFile(path.join(__dirname, 'index.html'));
+  mainWindow.loadFile(path.join(__dirname, 'CallPageBasic.html'));
 
   // Open the DevTools.
   mainWindow.webContents.openDevTools();
