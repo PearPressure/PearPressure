@@ -44,7 +44,9 @@
     }
   },
   "dependencies": {
-    "electron-squirrel-startup": "^1.0.0"
+    "@daily-co/daily-js": "^0.9.991",
+    "electron-squirrel-startup": "^1.0.0",
+    "request": "^2.88.2"
   },
   "devDependencies": {
     "@electron-forge/cli": "^6.0.0-beta.51",

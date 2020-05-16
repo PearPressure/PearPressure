@@ -83,6 +83,7 @@
 <body onload="setup()">
 
     <script>
+        const request = require('request');
         function showEvent(e) { console.log('callFrame event', e) }
 
         function setup() {
@@ -102,15 +103,21 @@
             // hard-code a meeting link for testing you could do something like
             // this:
             //
-            //   room = { url: 'https://your-domain.daily.co/hello' }
-            //   ownerLink = room.url;
-            //
-            room = await createMtgRoom();
-            ownerLink = await createMtgLinkWithToken(
-                room, {
-                is_owner: true,
-                enable_recording: 'local'
-            });
+            room = { url: 'https://pearpressure.daily.co/test-call',
+                headers: {
+                    authorization: 'Bearer 44b40a95595ee9a1b106706e6e4dede27b4d0a06eb091eedd2d5240ee722a263'
+                },
+                body: '{"properties":{"is_owner":true}}'
+            }
+            ownerLink = room.url;
+
+
+            //room = await createMtgRoom();
+            //ownerLink = await createMtgLinkWithToken(
+            //    room, {
+            //   is_owner: true,
+            //    enable_recording: 'local'
+            //});
 
             updateRoomInfoDisplay();
             setInterval(updateNetworkInfoDisplay, 5000);
