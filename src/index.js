@@ -1,43 +1,64 @@
 /* Defines Behavior for windows and other features in
  * the Pear Pressure Application
  */
+//import { createRequire } from 'module';
+//const require = createRequire(import.meta.url) dunno what to do here
 
-const { app, BrowserWindow } = require('electron');
+const { app, BrowserWindow, ipcMain } = require('electron');
 const path = require('path');
+const fs = require("fs");
+
+let win;
 
 // Handle creating/removing shortcuts on Windows when installing/uninstalling.
 if (require('electron-squirrel-startup')) { // eslint-disable-line global-require
   app.quit();
 }
 
-const createWindow = () => {
+async function createWindow () {
   // Create the browser window.
-  const mainWindow = new BrowserWindow({
-    width: 800,
-    height: 600,
+  win = new BrowserWindow({
+      width: 800,
+      height: 600,
+      webPreferences: {
+          nodeIntegration: false, // is default value after Electron v5
+          contextIsolation: true, // protect against prototype pollution
+          enableRemoteModule: false, // turn off remote
+          preload: path.join(__dirname, "preload.js") // use a preload script
+      }
   });
 
   // and load the index.html of the app.
-  mainWindow.loadFile(path.join(__dirname, 'index.html'));
+  win.loadFile(path.join(__dirname, 'index.html'));
 
   // Open the DevTools.
   mainWindow.webContents.openDevTools();
 };
 
+
 const createCall = () => {
-  const callWindow = new BrowserWindow({
+    console.log("CALLED!!!");
+    const callWindow = new BrowserWindow({
         width: 800,
         height: 600,
-  });
+    });
 
-  callWindow.loadFile(path.join(__dirname, 'CallPageBasic.html'));
+    callWindow.loadFile(path.join(__dirname, 'CallPageBasic.html'));
 }
-
 // This method will be called when Electron has finished
 // initialization and is ready to create browser windows.
 // Some APIs can only be used after this event occurs.
 app.on('ready', createWindow);
-app.on('ready', createCall);
+console.log("WHERE IS THIS");
+
+ipcMain.on("toMain", (event, args) => {
+    fs.readFile("path/to/file", (error, data) => {
+        // Do something with file contents
+
+        // Send result back to renderer process
+        win.webContents.send("fromMain", responseObj);
+    });
+});
 
 // Quit when all windows are closed.
 app.on('window-all-closed', () => {

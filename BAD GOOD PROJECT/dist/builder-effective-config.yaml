@@ -1,0 +1,16 @@
+directories:
+  output: dist
+  buildResources: resources
+productName: YourProductName
+appId: com.yourcompany|electron.yourproductname
+win:
+  target:
+    - nsis
+    - msi
+linux:
+  target:
+    - deb
+    - rpm
+    - snap
+    - AppImage
+electronVersion: 8.2.5
