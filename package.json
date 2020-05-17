@@ -1,61 +1,33 @@
 {
-  "name": "pearpressure",
-  "productName": "pearpressure",
-  "version": "0.0.0",
-  "description": "My Electron application description",
-  "main": "src/index.js",
+  "name": "electron-react-quick-start",
+  "version": "0.0.1",
+  "description": "A minimal Electron React application",
+  "main": "main.js",
   "scripts": {
-    "start": "electron-forge start",
-    "package": "electron-forge package",
-    "make": "electron-forge make",
-    "publish": "electron-forge publish",
-    "lint": "echo \"No linting configured\""
+    "dev": "webpack --watch",
+    "start": "electron ."
   },
-  "keywords": [],
-  "author": {
-    "name": "The Boomers"
-  },
-  "license": "MIT",
-  "config": {
-    "forge": {
-      "packagerConfig": {},
-      "makers": [
-        {
-          "name": "@electron-forge/maker-squirrel",
-          "config": {
-            "name": "pearpressure"
-          }
-        },
-        {
-          "name": "@electron-forge/maker-zip",
-          "platforms": [
-            "darwin"
-          ]
-        },
-        {
-          "name": "@electron-forge/maker-deb",
-          "config": {}
-        },
-        {
-          "name": "@electron-forge/maker-rpm",
-          "config": {}
-        }
-      ]
-    }
+  "repository": "https://github.com/electron/electron-quick-start",
+  "keywords": [
+    "Electron",
+    "quick",
+    "start",
+    "tutorial",
+    "demo"
+  ],
+  "author": "GitHub",
+  "license": "CC0-1.0",
+  "devDependencies": {
+    "babel": "^6.5.2",
+    "babel-core": "^6.18.2",
+    "babel-loader": "^6.2.7",
+    "babel-preset-es2015": "^6.18.0",
+    "babel-preset-react": "^6.16.0",
+    "electron": "^1.4.1",
+    "webpack": "^1.13.3"
   },
   "dependencies": {
-    "@daily-co/daily-js": "^0.9.991",
-    "electron-squirrel-startup": "^1.0.0",
-    "request": "^2.88.2"
-  },
-  "devDependencies": {
-    "@electron-forge/cli": "^6.0.0-beta.51",
-    "@electron-forge/maker-deb": "^6.0.0-beta.51",
-    "@electron-forge/maker-rpm": "^6.0.0-beta.51",
-    "@electron-forge/maker-squirrel": "^6.0.0-beta.51",
-    "@electron-forge/maker-zip": "^6.0.0-beta.51",
-    "electron": "8.2.5",
-    "electron-winstaller": "^4.0.0",
-    "electron-wix-msi": "^2.2.0"
+    "react": "^15.3.2",
+    "react-dom": "^15.3.2"
   }
 }

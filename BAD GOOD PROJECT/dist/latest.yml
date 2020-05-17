@@ -1,8 +1,0 @@
-version: 4.0.4
-files:
-  - url: YourProductName-Setup-4.0.4.exe
-    sha512: mBC/zI5+9YHq17x600NsKs/U9cScs4ilBqEQnTiZeSh4XXMFz6ZPLXnG9+5XhjA/DQwprxPD7Nv35wPjtcJsWQ==
-    size: 52173192
-path: YourProductName-Setup-4.0.4.exe
-sha512: mBC/zI5+9YHq17x600NsKs/U9cScs4ilBqEQnTiZeSh4XXMFz6ZPLXnG9+5XhjA/DQwprxPD7Nv35wPjtcJsWQ==
-releaseDate: '2020-05-16T22:54:57.266Z'
