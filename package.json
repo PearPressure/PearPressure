@@ -18,15 +18,23 @@
   "author": "GitHub",
   "license": "CC0-1.0",
   "devDependencies": {
+    "@babel/core": "^7.9.6",
+    "@babel/preset-env": "^7.9.6",
+    "@babel/preset-react": "^7.9.4",
     "babel": "^6.5.2",
-    "babel-core": "^6.18.2",
-    "babel-loader": "^6.2.7",
-    "babel-preset-es2015": "^6.18.0",
+    "babel-core": "^6.26.3",
+    "babel-loader": "^8.1.0",
     "babel-preset-react": "^6.16.0",
+    "css-loader": "^3.5.3",
     "electron": "^1.4.1",
-    "webpack": "^1.13.3"
+    "style-loader": "^1.2.1",
+    "svg-inline-loader": "^0.8.2",
+    "webpack": "^4.43.0",
+    "webpack-cli": "^3.3.11"
   },
   "dependencies": {
+    "@daily-co/daily-js": "^0.9.991",
+    "babel-preset-env": "^1.7.0",
     "react": "^15.3.2",
     "react-dom": "^15.3.2"
   }

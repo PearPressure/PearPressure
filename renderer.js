@@ -7,7 +7,9 @@ import ReactDOM from 'react-dom'
 import App from './App';
 
 class PearPressureApp extends React.Component {
-  render () {
+    
+    render() {
+      console.log('IS THIS GONNA PRINT OR NAH');
       return (
           App
     );

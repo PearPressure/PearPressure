@@ -4,7 +4,8 @@ import './App.css';
 import VideoCallFrame from './VideoCallFrame';
 
 function App() {
-  return (
+    console.log("here");
+    return (
     <div className="App">
       <header className="App-header">
         <img src={logo} className="App-logo" alt="logo" />
@@ -21,7 +22,7 @@ function App() {
         </a>
 
         <VideoCallFrame
-          url={ process.env.REACT_APP_DAILY_ROOM_URL }
+                  url={ 'https://pearpressure.daily.co/test-call' }
         ></VideoCallFrame>
 
       </header>
