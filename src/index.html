@@ -10,11 +10,9 @@
 
   <script>
     // You can also require other files to run in this process
-      const path = require('path');
       console.log("print");
       //require('./renderer.js');
-      var path = path.resolve(__dirname, '../dist/');
-      require(path+'renderer-bundle.js');
+      require('./dist/renderer-bundle.js');
       console.log("print");
       
   </script>

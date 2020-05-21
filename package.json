@@ -2,8 +2,9 @@
   "name": "electron-react-quick-start",
   "version": "0.0.1",
   "description": "A minimal Electron React application",
-  "main": "main.js",
+  "main": "src/main.js",
   "scripts": {
+    "configure": "npx webpack --config webpack.config.js",
     "dev": "webpack --watch",
     "start": "electron ."
   },
@@ -29,13 +30,16 @@
     "electron": "^1.4.1",
     "style-loader": "^1.2.1",
     "svg-inline-loader": "^0.8.2",
+    "svg-url-loader": "^5.0.0",
     "webpack": "^4.43.0",
     "webpack-cli": "^3.3.11"
   },
   "dependencies": {
     "@daily-co/daily-js": "^0.9.991",
     "babel-preset-env": "^1.7.0",
+    "html-loader": "^1.1.0",
     "react": "^15.3.2",
-    "react-dom": "^15.3.2"
+    "react-dom": "^15.3.2",
+    "url-loader": "^4.1.0"
   }
 }
