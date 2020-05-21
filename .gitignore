@@ -8,7 +8,6 @@
 # testing
 /coverage
 /.vs
-/src/.vs
 
 # production
 /build
