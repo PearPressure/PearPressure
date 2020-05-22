@@ -1,45 +1,72 @@
 {
-  "name": "electron-react-quick-start",
-  "version": "0.0.1",
-  "description": "A minimal Electron React application",
-  "main": "src/main.js",
-  "scripts": {
-    "configure": "npx webpack --config webpack.config.js",
-    "dev": "webpack --watch",
-    "start": "electron ."
+  "name": "electron-react-webpack-boilerplate",
+  "version": "1.12.0",
+  "description": "Minimal Electron, React, PostCSS and Webpack boilerplate to help you get started with building your next app.",
+  "license": "MIT",
+  "private": false,
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/alexdevero/electron-react-webpack-boilerplate.git"
   },
-  "repository": "https://github.com/electron/electron-quick-start",
+  "homepage": "",
+  "bugs": {
+    "url": "https://github.com/alexdevero/electron-react-webpack-boilerplate/issues"
+  },
   "keywords": [
-    "Electron",
-    "quick",
-    "start",
-    "tutorial",
-    "demo"
+    "app",
+    "boilerplate",
+    "electron",
+    "open",
+    "open-source",
+    "postcss",
+    "react",
+    "reactjs",
+    "source",
+    "webpack"
   ],
-  "author": "GitHub",
-  "license": "CC0-1.0",
-  "devDependencies": {
-    "@babel/core": "^7.9.6",
-    "@babel/preset-env": "^7.9.6",
-    "@babel/preset-react": "^7.9.4",
-    "babel": "^6.5.2",
-    "babel-core": "^6.26.3",
-    "babel-loader": "^8.1.0",
-    "babel-preset-react": "^6.16.0",
-    "css-loader": "^3.5.3",
-    "electron": "^1.4.1",
-    "style-loader": "^1.2.1",
-    "svg-inline-loader": "^0.8.2",
-    "svg-url-loader": "^5.0.0",
-    "webpack": "^4.43.0",
-    "webpack-cli": "^3.3.11"
+  "engines": {
+    "node": ">=9.0.0",
+    "npm": ">=5.0.0",
+    "yarn": ">=1.0.0"
+  },
+  "browserslist": [
+    "last 4 versions"
+  ],
+  "main": "main.js",
+  "scripts": {
+    "prod": "cross-env NODE_ENV=production webpack --mode production --config webpack.build.config.js && electron --noDevServer .",
+    "start": "cross-env NODE_ENV=development webpack-dev-server --hot --host 0.0.0.0 --config=./webpack.dev.config.js --mode development",
+    "build": "cross-env NODE_ENV=production webpack --config webpack.build.config.js --mode production",
+    "package": "npm run build",
+    "postpackage": "electron-packager ./ --out=./builds"
   },
   "dependencies": {
     "@daily-co/daily-js": "^0.9.991",
-    "babel-preset-env": "^1.7.0",
-    "html-loader": "^1.1.0",
-    "react": "^15.3.2",
-    "react-dom": "^15.3.2",
-    "url-loader": "^4.1.0"
+    "babel-plugin-module-resolver": "^4.0.0",
+    "react": "^16.13.1",
+    "react-dom": "^16.13.1"
+  },
+  "devDependencies": {
+    "@babel/core": "^7.9.6",
+    "@babel/preset-react": "^7.9.4",
+    "babel-loader": "^8.1.0",
+    "babili-webpack-plugin": "^0.1.2",
+    "cross-env": "^7.0.2",
+    "css-loader": "^3.5.3",
+    "electron": "^9.0.0",
+    "electron-devtools-installer": "^3.0.0",
+    "electron-packager": "^14.2.1",
+    "file-loader": "^6.0.0",
+    "html-webpack-plugin": "^4.3.0",
+    "mini-css-extract-plugin": "^0.9.0",
+    "postcss-import": "^12.0.1",
+    "postcss-loader": "^3.0.0",
+    "postcss-nested": "^4.2.1",
+    "postcss-preset-env": "^6.7.0",
+    "postcss-pxtorem": "^5.1.1",
+    "style-loader": "^1.2.0",
+    "webpack": "^4.43.0",
+    "webpack-cli": "^3.3.11",
+    "webpack-dev-server": "^3.11.0"
   }
 }

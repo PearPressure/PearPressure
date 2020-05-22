@@ -1,0 +1,23 @@
+{
+
+  "plugins": [
+    [
+      "module-resolver",
+      {
+        "cwd": "babelrc",
+        "alias": {
+          "Components": "./src/components",
+          "Documents": "./docs",
+          "Pages": "./src/pages",
+          "Assets": "./src/assets",
+          "Css":  "./src/assets/css"
+        }
+      }
+    ]
+  ],
+
+  "presets":
+    [
+      "@babel/preset-react"
+    ]
+}
