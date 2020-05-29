@@ -44,7 +44,9 @@
     "@daily-co/daily-js": "^0.9.991",
     "babel-plugin-module-resolver": "^4.0.0",
     "react": "^16.13.1",
-    "react-dom": "^16.13.1"
+    "react-dom": "^16.13.1",
+    "react-new-window": "^0.1.2",
+    "url-loader": "^4.1.0"
   },
   "devDependencies": {
     "@babel/core": "^7.9.6",

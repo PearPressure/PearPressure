@@ -1,7 +1,10 @@
 {
   "ExpandedNodes": [
-    ""
+    "",
+    "\\src",
+    "\\src\\components",
+    "\\src\\pages"
   ],
-  "SelectedNode": "\\postcss.config.js",
+  "SelectedNode": "\\src\\components\\App.js",
   "PreviewInSolutionExplorer": false
 }

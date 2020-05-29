@@ -35,8 +35,8 @@ module.exports = {
               include: defaultInclude
           },
           {
-              test: /\.(svg)$/,
-              include: [path.resolve(__dirname, "src")],
+              test: /\.svg$/,
+              include: [path.resolve(__dirname, "docs/images/logo")],
               use: "url-loader",
           }
     ]
