@@ -8,8 +8,8 @@ let root = document.createElement('div')
 
 root.id = 'root'
 document.body.appendChild(root)
-const button = document.getElementById('Button')
-console.log(button);
+//const button = document.getElementById('Button')
+//console.log(button);
 // Now we can render our application into it
 render(<App />, document.getElementById('root'))
 //render(<VideoPage />, document.getElementById('root')

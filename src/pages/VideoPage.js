@@ -2,6 +2,7 @@
 import 'Css/App.css'
 import React from 'react';
 import VideoCallFrame from 'Pages/VideoCallFrame.js'
+import { render } from 'react-dom'
 
 class VideoPage extends React.Component {
     render() {
@@ -19,3 +20,9 @@ class VideoPage extends React.Component {
 }
 
 export default VideoPage;
+
+let root = document.createElement('div')
+
+root.id = 'root'
+document.body.appendChild(root)
+render(<VideoPage />, document.getElementById('root'))
