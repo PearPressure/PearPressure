@@ -1,7 +1,6 @@
 import 'Css/App.css'
 import React, { Component, useState, useEffect } from 'react'
 import VideoCallFrame from 'Pages/VideoCallFrame.js'
-import VideoPage from 'Pages/VideoPage.js'
 import {ipcRenderer} from 'electron'
 //import logo from 'Documents/images/Logo/logo.svg';
 function Button() {
@@ -21,7 +20,7 @@ function Button() {
             setNameMonitor("true");
         else
             setNameMonitor("false");
-        console.log(ipcRenderer.sendSync('synchronous-message', 'VideoPage'))
+        console.log(ipcRenderer.sendSync('synchronous-message', ('open call window', 'VideoPage')))
     }
 
 
