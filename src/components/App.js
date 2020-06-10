@@ -20,7 +20,7 @@ function Button() {
             setNameMonitor("true");
         else
             setNameMonitor("false");
-        console.log(ipcRenderer.sendSync('synchronous-message', ('open call window', 'VideoPage')))
+        ipcRenderer.sendSync('synchronous-message', ('open call window', 'VideoPage'))
     }
 
 
@@ -33,6 +33,8 @@ function Button() {
     }
     return render()
 }
+
+
 
 class App extends Component {
 

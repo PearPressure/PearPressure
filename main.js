@@ -31,58 +31,111 @@ if (process.platform === 'win32') {
   app.commandLine.appendSwitch('force-device-scale-factor', '1')
 }
 
+
 function createWindow() {
   // Create the browser window.
-  mainWindow = new BrowserWindow({
-    width: 1024,
-    height: 768,
-    show: false,
-    webPreferences: {
-      nodeIntegration: true
+    if (mainWindow != null) {
+        secondWindow = new BrowserWindow({
+            width: 1024,
+            height: 768,
+            show: false,
+            webPreferences: {
+                nodeIntegration: true
+            }
+        })
+        let indexPath
+
+        if (dev && process.argv.indexOf('--noDevServer') === -1) {
+            indexPath = url.format({
+                protocol: 'http:',
+                host: 'localhost:8080',
+                pathname: 'index.html',
+                slashes: true
+            })
+        } else {
+            indexPath = url.format({
+                protocol: 'file:',
+                pathname: path.join(__dirname, 'dist', 'index.html'),
+                slashes: true
+            })
+        }
+
+        secondWindow.loadURL(indexPath + "?name=side")
+
+        // Don't show until we are ready and loaded
+        secondWindow.once('ready-to-show', () => {
+            secondWindow.show()
+
+            // Open the DevTools automatically if developing
+            if (dev) {
+                const { default: installExtension, REACT_DEVELOPER_TOOLS } = require('electron-devtools-installer')
+
+                installExtension(REACT_DEVELOPER_TOOLS)
+                    .catch(err => console.log('Error loading React DevTools: ', err))
+                secondWindow.webContents.openDevTools()
+            }
+        })
+
+        // Emitted when the window is closed.
+        secondWindow.on('closed', function () {
+            // Dereference the window object, usually you would store windows
+            // in an array if your app supports multi windows, this is the time
+            // when you should delete the corresponding element.
+            secondWindow = null
+        })
+    } else {
+        mainWindow = new BrowserWindow({
+            width: 1024,
+            height: 768,
+            show: false,
+            webPreferences: {
+                nodeIntegration: true
+            }
+        })
+
+        // and load the index.html of the app.
+        let indexPath
+
+        if (dev && process.argv.indexOf('--noDevServer') === -1) {
+            indexPath = url.format({
+                protocol: 'http:',
+                host: 'localhost:8080',
+                pathname: 'index.html',
+                slashes: true
+            })
+        } else {
+            indexPath = url.format({
+                protocol: 'file:',
+                pathname: path.join(__dirname, 'dist', 'index.html'),
+                slashes: true
+            })
+        }
+
+        mainWindow.loadURL(indexPath + "?name=main")
+
+        // Don't show until we are ready and loaded
+        mainWindow.once('ready-to-show', () => {
+            mainWindow.show()
+
+            // Open the DevTools automatically if developing
+            if (dev) {
+                const { default: installExtension, REACT_DEVELOPER_TOOLS } = require('electron-devtools-installer')
+
+                installExtension(REACT_DEVELOPER_TOOLS)
+                    .catch(err => console.log('Error loading React DevTools: ', err))
+                mainWindow.webContents.openDevTools()
+            }
+        })
+
+        // Emitted when the window is closed.
+        mainWindow.on('closed', function () {
+            // Dereference the window object, usually you would store windows
+            // in an array if your app supports multi windows, this is the time
+            // when you should delete the corresponding element.
+            secondWindow = null
+            mainWindow = null
+        })
     }
-  })
-
-  // and load the index.html of the app.
-  let indexPath
-
-  if (dev && process.argv.indexOf('--noDevServer') === -1) {
-    indexPath = url.format({
-      protocol: 'http:',
-      host: 'localhost:8080',
-      pathname: 'index.html',
-      slashes: true
-    })
-  } else {
-    indexPath = url.format({
-      protocol: 'file:',
-      pathname: path.join(__dirname, 'dist', 'index.html'),
-      slashes: true
-    })
-  }
-
-  mainWindow.loadURL(indexPath)
-
-  // Don't show until we are ready and loaded
-  mainWindow.once('ready-to-show', () => {
-    mainWindow.show()
-
-    // Open the DevTools automatically if developing
-    if (dev) {
-      const { default: installExtension, REACT_DEVELOPER_TOOLS } = require('electron-devtools-installer')
-
-      installExtension(REACT_DEVELOPER_TOOLS)
-        .catch(err => console.log('Error loading React DevTools: ', err))
-      mainWindow.webContents.openDevTools()
-    }
-  })
-
-  // Emitted when the window is closed.
-  mainWindow.on('closed', function() {
-    // Dereference the window object, usually you would store windows
-    // in an array if your app supports multi windows, this is the time
-    // when you should delete the corresponding element.
-    mainWindow = null
-  })
 }
 
 // This method will be called when Electron has finished
@@ -109,8 +162,11 @@ app.on('activate', () => {
 
 ipcMain.on('synchronous-message', (event, arg) => {
     console.log(arg)
-    if (event === "open call window") {
+    console.log(event)
+    if (arg === "VideoPage") {
+        console.log("bruhhhhhhhhhhhhhhhh")
             createWindow()
     }
-    event.sender.send('Call start', 'START THE CALL')
+    console.log("huh")
+    event.returnValue = "Recieved"
 })
