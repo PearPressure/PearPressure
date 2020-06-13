@@ -5,7 +5,7 @@ import VideoCallFrame from 'Pages/VideoCallFrame.js'
 import DailyIframe from "@daily-co/daily-js"
 
 
-let callObject
+let roomName = "https://pearpressure.daily.co/DRvskFeilid51C5hEf2C";
 
 
 function Button() {
@@ -19,13 +19,33 @@ function Button() {
         console.log("hi");
     }, []);
 
+
     function myOnClick() {
+        var request = require("request");
         setName(!name);
-        if (nameMonitor == "false")
+        if (nameMonitor == "false") {
+
             setNameMonitor("true");
+        }
         else
+        {
             setNameMonitor("false");
-        callObject = DailyIframe.createCallObject();
+        }
+        var options = {
+            method: "GET",
+            url: 'https://api.daily.co/v1/rooms',
+            headers: {
+                authorization: 'Bearer 44b40a95595ee9a1b106706e6e4dede27b4d0a06eb091eedd2d5240ee722a263'
+            }
+        };
+        request(options, function (error, response, body) {
+            if (error) throw new Error(error);
+            console.log(body);
+            var bodyParsed = JSON.parse(body);
+            console.log(bodyParsed);
+            roomName = bodyParsed.data[0].url;
+        });
+        console.log(roomName);
 
     }
 
@@ -51,7 +71,7 @@ class VideoPage extends React.Component {
                </header>
                 <Button />
                 <VideoCallFrame
-                    url={'https://pearpressure.daily.co/test-call'}
+                    url={roomName}
                 ></VideoCallFrame>
 
             </div>
