@@ -8,8 +8,6 @@ let root = document.createElement('div')
 
 root.id = 'root'
 document.body.appendChild(root)
-const ar = document.querySelectorAll('*')
-console.log(ar[6])
 //const button = document.getElementById('Button')
 //console.log(button);
 // Now we can render our application into it
