@@ -91,6 +91,7 @@ class VideoPage extends React.Component {
     render() {
         return (
             <div className="VideoPage">
+
                 <VideoCallFrame
                     url={'https://pearpressure.daily.co/test-call'}
                 ></VideoCallFrame>
