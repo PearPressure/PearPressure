@@ -25,11 +25,18 @@ class VideoCallFrame extends React.Component {
             }
         });
         this.daily.join({ url: this.props.url, });
+        this.daily.on('left-meeting', (evt) => {
+            console.log('ur mom gay', evt);
+            console.log('bitch tits');
+            ipcRenderer.invoke('asynch message channel', ('close call window', 'VideoCallFrame close'));
+            console.log('bitch tits');
+        });
         /*this.daily = DailyIframe.wrap(this.iframeRef.current);
         console.log("dats it bois")
         this.daily.join({ url: this.props.url, });*/
 
     }
+
 
     /*constructor(props) {
         super(props);

@@ -164,9 +164,15 @@ ipcMain.on('synchronous-message', (event, arg) => {
     console.log(arg)
     console.log(event)
     if (arg === "VideoPage") {
-        console.log("bruhhhhhhhhhhhhhhhh")
-            createWindow()
+        console.log("bruhhhhhhhhhhhhhhhh");
+        createWindow();
     }
     console.log("huh")
     event.returnValue = "Recieved"
 })
+    .handle('asynch message channel', (event, arg) => {
+        if (arg === "'VideoCallFrame close") {
+            console.log("wasssaaaaaaahhhh dood");
+            mainWindow.close();
+        }
+    })
