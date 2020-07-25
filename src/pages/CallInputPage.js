@@ -1,14 +1,15 @@
 import 'Css/App.css'
-import React, { Component, useState, useEffect } from 'react'
-import VideoCallFrame from 'Pages/VideoCallFrame.js'
-import {ipcRenderer} from 'electron'
-//import logo from 'Documents/images/Logo/logo.svg';
+import React, { Component, useState, useEffect } from 'react';
+import { ipcRenderer } from 'electron'
+
+
+
 function Button() {
     const [count, setCount] = useState(0);
     const [name, setName] = useState(false);
     const [nameMonitor, setNameMonitor] = useState("false");
 
-    
+
     // ComponentDidMount
     useEffect(function myEffect() {
         console.log("hi");
@@ -20,7 +21,7 @@ function Button() {
             setNameMonitor("true");
         else
             setNameMonitor("false");
-        ipcRenderer.send('asynchronous open Input', ('open CallInputPage', 'CallInputPage'))
+        ipcRenderer.send('asynchronous open Video', ('open call window', 'VideoPage'))
     }
 
 
@@ -35,22 +36,20 @@ function Button() {
 }
 
 
-
-class App extends Component {
+class CallInputPage extends Component {
 
     render() {
-      return (
-          <div className="App">
-              <header className="App-header">
-                  <p>
-                      Edit <code>the shit</code> and save to reload.
-                  </p>
-              </header>
-                  whatttttttttttttt
-              <Button />
-          </div>
-      );
-  }
+        return (
+            <div className="CallInputPage">
+                <header className="CallInputPage-header">
+                    <p>
+                        Enter the name of your room
+                    </p>
+                </header>
+                <Button />
+            </div>
+        );
+    }
 }
 
-export default App
+export default CallInputPage

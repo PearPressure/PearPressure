@@ -1,5 +1,6 @@
 import React from 'react';
 import DailyIframe from '@daily-co/daily-js';
+import { ipcRenderer } from 'electron';
 
 
 
@@ -25,11 +26,8 @@ class VideoCallFrame extends React.Component {
             }
         });
         this.daily.join({ url: this.props.url, });
-        this.daily.on('left-meeting', (evt) => {
-            console.log('ur mom gay', evt);
-            console.log('bitch tits');
-            ipcRenderer.invoke('asynch message channel', ('close call window', 'VideoCallFrame close'));
-            console.log('bitch tits');
+        this.daily.on('left-meeting', async (evt) => {
+            ipcRenderer.send('asynch message channel', ('close call window', 'VideoCallFrame close'))
         });
         /*this.daily = DailyIframe.wrap(this.iframeRef.current);
         console.log("dats it bois")

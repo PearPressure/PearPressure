@@ -9,6 +9,7 @@ const url = require('url')
 // be closed automatically when the JavaScript object is garbage collected.
 let mainWindow
 let secondWindow
+let tertiaryWindow
 
 // Keep a reference for dev mode
 let dev = false
@@ -35,54 +36,104 @@ if (process.platform === 'win32') {
 function createWindow() {
   // Create the browser window.
     if (mainWindow != null) {
-        secondWindow = new BrowserWindow({
-            width: 1024,
-            height: 768,
-            show: false,
-            webPreferences: {
-                nodeIntegration: true
-            }
-        })
-        let indexPath
+        if (secondWindow != null) {
+            tertiaryWindow = new BrowserWindow({
+                width: 1024,
+                height: 768,
+                show: false,
+                webPreferences: {
+                    nodeIntegration: true
+                }
+            })
+            let indexPath
 
-        if (dev && process.argv.indexOf('--noDevServer') === -1) {
-            indexPath = url.format({
-                protocol: 'http:',
-                host: 'localhost:8080',
-                pathname: 'index.html',
-                slashes: true
+            if (dev && process.argv.indexOf('--noDevServer') === -1) {
+                indexPath = url.format({
+                    protocol: 'http:',
+                    host: 'localhost:8080',
+                    pathname: 'index.html',
+                    slashes: true
+                })
+            } else {
+                indexPath = url.format({
+                    protocol: 'file:',
+                    pathname: path.join(__dirname, 'dist', 'index.html'),
+                    slashes: true
+                })
+            }
+            tertiaryWindow.loadURL(indexPath + "?name=VideoPage")
+
+            // Don't show until we are ready and loaded
+            tertiaryWindow.once('ready-to-show', () => {
+                tertiaryWindow.show()
+
+                // Open the DevTools automatically if developing
+                if (dev) {
+                    const { default: installExtension, REACT_DEVELOPER_TOOLS } = require('electron-devtools-installer')
+
+                    installExtension(REACT_DEVELOPER_TOOLS)
+                        .catch(err => console.log('Error loading React DevTools: ', err))
+                    tertiaryWindow.webContents.openDevTools()
+                }
+            })
+
+            // Emitted when the window is closed.
+            tertiaryWindow.on('closed', function () {
+                // Dereference the window object, usually you would store windows
+                // in an array if your app supports multi windows, this is the time
+                // when you should delete the corresponding element.
+                tertiaryWindow = null
             })
         } else {
-            indexPath = url.format({
-                protocol: 'file:',
-                pathname: path.join(__dirname, 'dist', 'index.html'),
-                slashes: true
+            secondWindow = new BrowserWindow({
+                width: 768,
+                height: 768,
+                show: false,
+                webPreferences: {
+                    nodeIntegration: true
+                }
+            })
+            let indexPath
+
+            if (dev && process.argv.indexOf('--noDevServer') === -1) {
+                indexPath = url.format({
+                    protocol: 'http:',
+                    host: 'localhost:8080',
+                    pathname: 'index.html',
+                    slashes: true
+                })
+            } else {
+                indexPath = url.format({
+                    protocol: 'file:',
+                    pathname: path.join(__dirname, 'dist', 'index.html'),
+                    slashes: true
+                })
+            }
+
+            secondWindow.loadURL(indexPath + "?name=CallInputPage")
+
+            // Don't show until we are ready and loaded
+            secondWindow.once('ready-to-show', () => {
+                secondWindow.show()
+
+                // Open the DevTools automatically if developing
+                if (dev) {
+                    const { default: installExtension, REACT_DEVELOPER_TOOLS } = require('electron-devtools-installer')
+
+                    installExtension(REACT_DEVELOPER_TOOLS)
+                        .catch(err => console.log('Error loading React DevTools: ', err))
+                    secondWindow.webContents.openDevTools()
+                }
+            })
+
+            // Emitted when the window is closed.
+            secondWindow.on('closed', function () {
+                // Dereference the window object, usually you would store windows
+                // in an array if your app supports multi windows, this is the time
+                // when you should delete the corresponding element.
+                secondWindow = null
             })
         }
-
-        secondWindow.loadURL(indexPath + "?name=side")
-
-        // Don't show until we are ready and loaded
-        secondWindow.once('ready-to-show', () => {
-            secondWindow.show()
-
-            // Open the DevTools automatically if developing
-            if (dev) {
-                const { default: installExtension, REACT_DEVELOPER_TOOLS } = require('electron-devtools-installer')
-
-                installExtension(REACT_DEVELOPER_TOOLS)
-                    .catch(err => console.log('Error loading React DevTools: ', err))
-                secondWindow.webContents.openDevTools()
-            }
-        })
-
-        // Emitted when the window is closed.
-        secondWindow.on('closed', function () {
-            // Dereference the window object, usually you would store windows
-            // in an array if your app supports multi windows, this is the time
-            // when you should delete the corresponding element.
-            secondWindow = null
-        })
     } else {
         mainWindow = new BrowserWindow({
             width: 1024,
@@ -160,19 +211,25 @@ app.on('activate', () => {
   }
 })
 
-ipcMain.on('synchronous-message', (event, arg) => {
-    console.log(arg)
-    console.log(event)
-    if (arg === "VideoPage") {
-        console.log("bruhhhhhhhhhhhhhhhh");
+ipcMain.on('asynchronous open Input', (event, arg) => {
+    if (arg === "CallInputPage") {
         createWindow();
     }
-    console.log("huh")
     event.returnValue = "Recieved"
+    return
 })
-    .handle('asynch message channel', (event, arg) => {
-        if (arg === "'VideoCallFrame close") {
-            console.log("wasssaaaaaaahhhh dood");
-            mainWindow.close();
+    .on('asynchronous open Video', (event, arg) => {
+        if (arg === "VideoPage") {
+            createWindow();
+            secondWindow.close();
         }
+        event.returnValue = "Recieved"
+        return
+    })
+    .on('asynch message channel', async (_event, _arg) => {
+        if (_arg === "VideoCallFrame close") {
+            tertiaryWindow.close();
+        }
+        _event.returnValue = "closed"
+        return _event.returnValue
     })
