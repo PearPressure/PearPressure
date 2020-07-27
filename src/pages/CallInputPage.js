@@ -1,9 +1,10 @@
 import 'Css/App.css'
 import React, { Component, useState, useEffect } from 'react';
 import { ipcRenderer } from 'electron'
+import { JSONWrite } from 'Helpers/JSONHelper.js'
 
 const auth = 'Bearer 44b40a95595ee9a1b106706e6e4dede27b4d0a06eb091eedd2d5240ee722a263';
-let roomUrl = 'THIS IS A TEST';
+var roomUrl = 'THIS IS A TEST';
 
 function Button() {
     const [count, setCount] = useState(0);
@@ -37,8 +38,11 @@ function Button() {
         request(options, callback);
         function callback(error, response, body) {
             if (error) throw new Error(error);
+            console.log(body)
+            console.log(body.url)
             console.log(roomUrl)
             roomUrl = JSON.parse(body).url;
+            await JSONWrite(body, 'Data/rooms/curRoom/room.JSON')
             console.log(roomUrl)
         }
 
@@ -70,7 +74,7 @@ function Button() {
     }
     return render()
 }
-console.log(roomUrl)
+
 
 
 class CallInputPage extends Component {

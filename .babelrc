@@ -10,7 +10,9 @@
           "Documents": "./docs",
           "Pages": "./src/pages",
           "Assets": "./src/assets",
-          "Css":  "./src/assets/css"
+          "Css": "./src/assets/css",
+          "Helpers": "./src/helpers",
+          "Data":  "./src/data"
         }
       }
     ]

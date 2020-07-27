@@ -3,6 +3,7 @@
     "",
     "\\src",
     "\\src\\components",
+    "\\src\\helpers",
     "\\src\\pages"
   ],
   "SelectedNode": "\\src\\pages\\CallInputPage.js",
