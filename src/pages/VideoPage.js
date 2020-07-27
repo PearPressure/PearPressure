@@ -3,9 +3,9 @@ import 'Css/App.css'
 import React, { useState, useEffect } from 'react';
 import VideoCallFrame from 'Pages/VideoCallFrame.js'
 import DailyIframe from "@daily-co/daily-js"
+import * as input from 'Pages/CallInputPage.js'
 
-//const user = require('./CallInputPage.js');
-//console.log(user);
+console.log(`${input.roomUrl}`)
 let url = 'https://pearpressure.daily.co/test-call';
 
 function Button() {
