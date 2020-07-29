@@ -3,11 +3,17 @@ import 'Css/App.css'
 import React, { useState, useEffect } from 'react';
 import VideoCallFrame from 'Pages/VideoCallFrame.js'
 import DailyIframe from "@daily-co/daily-js"
-import * as input from 'Pages/CallInputPage.js'
 
-console.log(`${input.roomUrl}`)
-let url = 'https://pearpressure.daily.co/test-call';
-
+const fs = require('fs');
+var url;
+try {
+    const data = fs.readFileSync('src/data/rooms/curRoom/room.json')
+    url = JSON.parse(data).url;
+    console.log(url)
+} catch (err) {
+    console.error(err);
+}
+console.log(url)
 function Button() {
     const [count, setCount] = useState(0);
     const [name, setName] = useState(false);

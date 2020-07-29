@@ -6,8 +6,9 @@
     "url": "https://github.com/alexdevero/electron-react-webpack-boilerplate/issues"
   },
   "dependencies": {
-    "@daily-co/daily-js": "^0.9.991",
+    "@daily-co/daily-js": "^0.9.992",
     "babel-plugin-module-resolver": "^4.0.0",
+    "fs": "0.0.1-security",
     "react": "^16.13.1",
     "react-dom": "^16.13.1",
     "react-new-window": "^0.1.2",

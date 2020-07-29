@@ -1,7 +1,9 @@
 import 'Css/App.css'
 import React, { Component, useState, useEffect } from 'react';
 import { ipcRenderer } from 'electron'
-import { JSONWrite } from 'Helpers/JSONHelper.js'
+import { recordFile } from 'Helpers/JSONHelper.js'
+
+const fs = require('fs');
 
 const auth = 'Bearer 44b40a95595ee9a1b106706e6e4dede27b4d0a06eb091eedd2d5240ee722a263';
 var roomUrl = 'THIS IS A TEST';
@@ -42,7 +44,12 @@ function Button() {
             console.log(body.url)
             console.log(roomUrl)
             roomUrl = JSON.parse(body).url;
-            await JSONWrite(body, 'Data/rooms/curRoom/room.JSON')
+            try {
+                fs.writeFileSync('src/data/rooms/curRoom/room.json', body)
+                console.log('data saved');
+            } catch (error) {
+                console.error(error);
+            }
             console.log(roomUrl)
         }
 
@@ -61,7 +68,7 @@ function Button() {
                 console.log(theResponse);
             });
         }*/
-        //ipcRenderer.send('asynchronous open Video', ('open call window', 'VideoPage'))
+        ipcRenderer.send('asynchronous open Video', ('open call window', 'VideoPage'))
     }
 
 

@@ -6,6 +6,9 @@ function recordFile(obj, path) {
     return new Promise(async (resolve, reject) => {
         var objJson = JSON.stringify(obj, function (k, v) {
             console.log("Hello in there")
+            console.log(obj)
+            console.log(k)
+            console.log(v)
             if (v instanceof Array)
                 return JSON.stringify(v);
             return v;
@@ -20,5 +23,5 @@ function recordFile(obj, path) {
         resolve();
     });
 }
-
-export var JSONWrite = recordFile
+console.log(recordFile)
+module.exports = recordFile;
